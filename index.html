@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verdadeiro Barbearia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        /* --- Variáveis de Cores --- */
+        :root {
+            --fundo-dark: #0a0a0a;
+            --fundo-medio-dark: #1a1a1a;
+            --azul-principal: #003366;
+            --azul-secundario: #66B2FF; /* Azul Destaque */
+            --branco-texto: #e0e0e0;
+            --cinza-borda: #333333;
+        }
+
+        /* --- Reset e Estilos Base --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            color: var(--branco-texto);
+            background-color: var(--fundo-dark);
+            scroll-behavior: smooth;
+        }
+
+        /* Títulos agora usam Montserrat (mesma do Hero) */
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800; /* Bem grosso e impactante */
+            text-transform: uppercase; /* Letras maiúsculas para padronizar */
+            letter-spacing: 1px;
+            margin-bottom: 0.5em;
+            color: var(--branco-texto);
+        }
+        h2 { font-size: 2.5em; } /* Ajuste de tamanho para os títulos de seção */
+        
+        /* Container Padrão */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        a { text-decoration: none; color: var(--azul-secundario); transition: color 0.3s ease; }
+        a:hover { color: var(--branco-texto); }
+        
+        /* --- HEADER --- */
+        .header {
+            background: var(--fundo-dark);
+            padding: 15px 40px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--cinza-borda);
+        }
+        .header-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 900; 
+            color: var(--branco-texto);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .logo span { color: var(--azul-secundario); }
+        
+        .nav ul { list-style: none; display: flex; }
+        .nav ul li { margin-left: 35px; }
+        .nav ul li a {
+            color: var(--branco-texto);
+            font-weight: 500;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            padding: 8px 0;
+            position: relative;
+        }
+        .nav ul li a::after {
+            content: '';
+            position: absolute; left: 0; bottom: 0; width: 0; height: 2px;
+            background-color: var(--azul-secundario);
+            transition: width 0.3s ease;
+        }
+        .nav ul li a:hover::after { width: 100%; }
+
+        /* --- HERO --- */
+        .hero {
+            /* Imagem de fundo */
+            background: url('barbearia.png') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--branco-texto);
+            position: relative;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative; z-index: 2;
+            animation: fadeIn 1.5s ease-out;
+            padding: 0 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero h1 {
+            font-size: 4.5em; /* Tamanho grande */
+            font-weight: 900; /* Extra Bold */
+            margin-bottom: 0.2em;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+            line-height: 1.1;
+        }
+        /* Classe específica para deixar o texto azul no Hero */
+        .text-azul {
+            color: var(--azul-secundario);
+        }
+
+        .hero p {
+            font-size: 1.4em;
+            font-weight: 300; /* Texto fino para contraste com o título grosso */
+            margin-bottom: 2em;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            text-transform: uppercase;
+        }
+
+        /* Botão Principal */
+        .btn-agendar {
+            background: var(--azul-secundario);
+            color: var(--fundo-dark);
+            padding: 18px 40px;
+            border-radius: 3px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-size: 1em;
+        }
+        .btn-agendar:hover {
+            background: #25D366;
+            color: #fff;
+            transform: translateY(-5px);
+        }
+
+        .btn-ig {
+            background: var(--azul-secundario);
+            color: var(--fundo-dark);
+            padding: 18px 40px;
+            border-radius: 3px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-size: 1em;
+        }
+        .btn-ig:hover {
+            background: #dc2743;
+            color: #fff;
+            transform: translateY(-5px);
+        }
+        
+        /* --- ESTILOS GERAIS DE SEÇÃO --- */
+        .section { padding: 100px 0; text-align: center; }
+        
+        /* Títulos das Seções agora usam a mesma fonte do Hero */
+        .section-titulo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2.8em;
+            margin-bottom: 1.5em;
+            color: var(--branco-texto);
+            position: relative;
+            padding-bottom: 15px;
+            display: inline-block;
+        }
+        .section-titulo::after {
+            content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+            bottom: 0; width: 80px; height: 4px;
+            background-color: var(--azul-secundario); border-radius: 2px;
+        }
+        .bg-medium-dark { background-color: var(--fundo-medio-dark); }
+
+        /* --- HISTÓRIA --- */
+        .sobre-container-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            text-align: left;
+        }
+        .sobre-texto { flex: 1; }
+        .sobre-texto p {
+            font-size: 1.1em;
+            margin-bottom: 1.5em;
+            color: #ccc;
+            font-weight: 300; /* Texto corrido mais leve */
+        }
+        .sobre-foto { flex: 1; }
+        .sobre-foto img {
+            width: 100%;
+            height: auto;
+            border: 2px solid var(--azul-principal);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            filter: grayscale(20%);
+        }
+
+        /* --- SERVIÇOS --- */
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            text-align: left;
+        }
+        .servico-item {
+            background: var(--fundo-dark);
+            padding: 35px;
+            border: 1px solid var(--cinza-borda);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .servico-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--azul-secundario);
+        }
+        /* Títulos dos serviços também em Montserrat Bold */
+        .servico-item h3 { 
+            color: var(--azul-secundario); 
+            font-size: 1.2 em; 
+            font-weight: 700;
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+        }
+        .servico-item h3 i { font-size: 0.9em; } 
+        .servico-item p {
+            font-weight: 300;
+            opacity: 0.8;
+        }
+        .preco {
+            font-weight: 700;
+            color: var(--azul-principal);
+            font-size: 1.4em;
+            margin-top: 15px;
+        }
+        
+        /* --- GALERIA --- */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+        }
+        .galeria-item {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--cinza-borda);
+            height: 300px;
+        }
+        .galeria-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s ease;
+            filter: grayscale(60%);
+        }
+        .galeria-item:hover img { transform: scale(1.05); filter: grayscale(0%); }
+        
+        /* --- CONTATO --- */
+        .contato-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 50px;
+            text-align: center;
+        }
+        .contato-info h3 { font-size: 1.4em; font-weight: 700; color: var(--azul-secundario); text-align: center; padding-top: 10px; }
+        .contato-info p { font-weight: 300; text-align: center; }
+        
+        .mapa-embed {
+            width: 100%; height: 450px; border: 0;
+            border: 2px solid var(--azul-principal);
+            filter: grayscale(80%) invert(10%);
+            transition: filter 0.3s ease;
+        }
+        .mapa-embed:hover { filter: grayscale(0%) invert(0%); }
+
+        /* --- FOOTER --- */
+        .footer {
+            background: var(--fundo-dark);
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid var(--cinza-borda);
+        }
+        .footer .social-icons { margin: 20px 0; }
+        .footer .social-icons a {
+            font-size: 1.8em; margin: 0 15px;
+            color: var(--branco-texto);
+            transition: color 0.3s ease;
+        }
+        .footer .social-icons a:hover { color: var(--azul-secundario); }
+        .copyright { font-size: 0.8em; color: var(--cinza-borda); margin-top: 0px; text-transform: uppercase; letter-spacing: 1px;}
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .sobre-container-flex { flex-direction: column; }
+            .sobre-foto { width: 100%; }
+        }
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; gap: 15px; }
+            .nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .nav ul li { margin-left: 0; }
+            .hero h1 { font-size: 2.8em; }
+            .contato-grid { grid-template-columns: 1fr; }
+        }
+
+        .reveal-on-scroll {
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* Container para alinhar os botões */
+        .social-buttons {
+            gap: 10px; /* Espaço entre os botões */
+            margin-top: 15px;
+            flex-wrap: wrap; /* Garante que quebre linha em telas muito pequenas */
+        }
+
+        /* Estilo base para ambos os botões */
+        .btn-social {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            border: none;
+            flex: 1; /* Faz os botões ocuparem larguras iguais se possível */
+            min-width: 120px; /* Tamanho mínimo para não ficarem espremidos */
+        }
+
+        .btn-social i {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+
+        .btn-social:hover {
+            transform: translateY(-3px);
+            color: #fff;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Cor específica do WhatsApp */
+        .btn-wpp {
+            background-color: #25d366;
+        }
+        .btn-wpp:hover {
+            background-color: #1ebe57;
+        }
+
+        /* Cor específica do Instagram (Degradê oficial) */
+        .btn-insta {
+            background: #f09433; 
+            background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+            background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+        }
+        .btn-insta:hover {
+            opacity: 0.9; /* Leve transparência no hover para destacar o degradê */
+        }
+        
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">V<span>B</span></div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#hero">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>VERDADEIRO <span class="text-azul">BARBEARIA</span></h1>
+            
+            <p>SEU NOVO PADRÃO DE ESTILO</p>
+            
+            <a href="https://wa.me/5562995007721" target="_blank" class="btn-agendar">
+                <i class="fab fa-whatsapp"></i> AGENDAR HORÁRIO
+            </a>
+            <a href="https://wa.me/5562995007721" target="_blank" class="btn-ig">
+                <i class="fab fa-instagram"></i> INSTAGRAM
+            </a>
+        </div>
+    </section>
+
+    <section class="section" id="sobre">
+        <div class="container reveal-on-scroll">
+            <h2 class="section-titulo">NOSSA HISTÓRIA</h2>
+            <div class="sobre-container-flex">
+                <div class="sobre-texto">
+                    <p>Na <strong>Verdadeiro Barbearia</strong>, acreditamos que um bom corte de cabelo ou uma barba bem feita são mais do que um serviço – são uma expressão de identidade e estilo.</p>
+                    <p>Desde a nossa fundação, nos dedicamos a criar um ambiente onde a tradição encontra a modernidade. Nossa missão é resgatar a arte do barbear clássico, oferecendo um refúgio para o homem moderno relaxar e renovar seu visual com precisão e excelência.</p>
+                    <p style="color: var(--azul-secundario); font-style: italic; margin-top: 30px;">"Elegância não é sobre ser notado, é sobre ser lembrado."</p>
+                </div>
+                <div class="sobre-foto">
+                    <img src="barbeiro1.png" alt="Foto do Dono da Verdadeiro Barbearia">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-medium-dark" id="servicos">
+        <div class="container reveal-on-scroll">
+            <h2 class="section-titulo">NOSSOS SERVIÇOS</h2>
+            <div class="servicos-grid">
+                
+                <div class="servico-item">
+                    <h3><i class="fas fa-cut"></i> CORTE VERDADEIRO</h3>
+                    <p>Corte personalizado (tesoura ou máquina). Inclui lavagem e finalização com produto.</p>
+                    <div class="preco">R$ 35,00</div>
+                </div>
+                
+                <div class="servico-item">
+                    <h3><i class="fas fa-cut"></i> BARBA VERDADEIRO</h3>
+                    <p>Modelagem e alinhamento com navalha. Inclui ritual de toalha quente e hidratação.</p>
+                    <div class="preco">R$ 30,00</div>
+                </div>
+                
+                <div class="servico-item">
+                    <h3><i class="fas fa-scissors"></i> COMBO VERDADEIRO</h3>
+                    <p>Cabelo e barba para você se manter em dia. Praticidade e economia para você.</p>
+                    <div class="preco">R$ 65,00</div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="galeria">
+        <div class="container reveal-on-scroll">
+            <h2 class="section-titulo">CORTES EM DESTAQUE</h2>
+            <p style="font-size: 1.1em; opacity: 0.8; margin-bottom: 40px;">CONFIRA O NOSSO PADRÃO DE QUALIDADE.</p>
+            <div class="galeria-grid">
+                <div class="galeria-item">
+                    <img src="corte1.png" alt="Corte Moderno">
+                </div>
+                <div class="galeria-item">
+                    <img src="corte2.png" alt="Barba Desenhada">
+                </div>
+                <div class="galeria-item">
+                    <img src="corte3.png" alt="Fade Perfeito">
+                </div>
+                <div class="galeria-item">
+                    <img src="corte4.png" alt="Estilo Clássico">
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section class="section bg-medium-dark" id="contato">
+    <div class="container reveal-on-scroll">
+        <h2 class="section-titulo">VISITE A BARBEARIA</h2>
+        
+        <div class="contato-grid">
+            <div class="contato-info">
+                <div>
+                    <h3><i class="fas fa-map-marker-alt"></i> LOCALIZAÇÃO</h3>
+                    <p>R. Jh 1, 1 - Quadra 14 Lote 12</p>
+                    <p>Jardim das Hortensias, Goiânia - GO</p>
+                    <p>CEP 74474-116</p>
+                </div>
+                
+                <div>
+                    <h3><i class="fas fa-clock"></i> HORÁRIO</h3>
+                    <p>Seg - Sex: 9h às 19h</p>
+                    <p>Sáb: 9h às 17h</p>
+                </div>
+                <div>
+                <h3><i class="fas fa-phone-alt"></i> CONTATO</h3>
+                <p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/5562995007721" target="_blank" class="btn-social btn-wpp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                    <div class="social-buttons"> 
+                        <a href="https://instagram.com/verdadeiro_barbearia" target="_blank" class="btn-social btn-insta">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                    </div>
+                </p>
+                </div>
+            </div>
+            <div>
+                <iframe class="mapa-embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3822.945384287658!2d-49.3288318!3d-16.6302245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935e97d0a1555555%3A0x6666666666666666!2sR.%20Jh%201%2C%201%20-%20Jardim%20das%20Hortensias%2C%20Goi%C3%A2nia%20-%20GO%2C%2074474-116!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>    
+
+    <footer class="footer">
+        <div class="container">
+            
+            <p class="copyright">© 2025 VERDADEIRO BARBEARIA. TODOS OS DIREITOS RESERVADOS.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.reveal-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
+
+</body>
+</html>
